@@ -1,0 +1,11 @@
+{
+    "name": "space-factories",
+    "version": "0.1.0",
+    "title": "Space Factories",
+    "author": "metalbass",
+    "contact": "xavier1923@gmail.com",
+    "homepage": "https://github.com/metalbass/space-factories",
+    "factorio_version": "0.18",
+    "dependencies": ["base >= 0.18", "Factorissimo2 >= 2.4.2", "space-exploration >= 0.2.16"],
+    "description": "Build Factorissimo2 factories in space with the Space Exploration mod."
+}
