@@ -1,42 +1,49 @@
-local factory_names = { "factory-1", "factory-2", "factory-3" }
-local floor_names = { "factory-floor", "factory-pattern" }
-
-local space_layer = "layer-14"
-local factory_collision_mask = {"item-layer","object-layer","player-layer","water-tile"}
+local factory_names = {"factory-1", "factory-2", "factory-3"}
 
 
-local function make_factory_placeable_on_space(name)
-  log("Editing collision_mask for: " .. name)
+local function copy_factory(original_name, suffix, allow_recipe, minable_count)
+    local entity = table.deepcopy(data.raw["storage-tank"][original_name .. suffix])
+    entity.name = "space-" .. original_name .. suffix
+    entity.localised_name = {"entity-name." .. entity.name .. suffix}
 
-  data.raw["storage-tank"][name].collision_mask = factory_collision_mask
-end
+    entity.minable.result = entity.name
+    entity.minable.count = minable_count
 
+    entity.pictures.picture.layers[2].filename = "__space-factories__/graphics/factory/".. original_name ..".png"
 
-local function make_factories_placeable_on_space()
-  for i=1, #factory_names do
-    make_factory_placeable_on_space(factory_names[i]) -- generic factory item
+    local item = table.deepcopy(data.raw.item[original_name .. suffix])
+    item.name = entity.name
+    item.localised_name = {"item-name." .. entity.name}
 
-    for j=10,99 do
-      make_factory_placeable_on_space(factory_names[i] .. "-s" .. j) -- specific factory
+    item.icon = "__space-factories__/graphics/icon/".. original_name ..".png"
+
+    item.place_result = entity.name
+
+    if allow_recipe then
+        local recipe = table.deepcopy(data.raw.recipe[original_name .. suffix])
+        recipe.name = entity.name
+        recipe.localised_name = {"recipe-name." .. entity.name}
+        recipe.result = entity.name
+
+        data:extend({entity, item, recipe})
+    else
+        data:extend({entity, item})
     end
-    
-    make_factory_placeable_on_space(factory_names[i] .. "-i") -- invalid factory
-  end
+
 end
 
 
-local function make_space_buildings_placeable_over_factory_floors()
-  for i=1, #factory_names do
-    for j=1, #floor_names do
-      local tile_name = floor_names[j] .. "-" .. i
-
-      log("Editing collision_mask for: " .. tile_name)
-
-      data.raw.tile[tile_name].collision_mask = { space_layer }
+for _, original_name in ipairs(factory_names) do
+    copy_factory(original_name, "", true, 0)
+    for i=10,99 do
+        copy_factory(original_name, "-s" .. i, false, 1)
     end
-  end
+    copy_factory(original_name, "-i", false, 1)
+
+    local overlay = table.deepcopy(data.raw["simple-entity"][original_name .. "-overlay"])
+    overlay.name = "space-" .. original_name .. "-overlay"
+
+    overlay.picture.layers[2].filename = "__space-factories__/graphics/factory/".. original_name ..".png"
+
+    data:extend({overlay})
 end
-
-
-make_factories_placeable_on_space()
-make_space_buildings_placeable_over_factory_floors()
