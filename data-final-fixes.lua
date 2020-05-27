@@ -1,4 +1,6 @@
 local factory_names = {"factory-1", "factory-2", "factory-3"}
+local SPACE_FACTORIES = "__space-factories__"
+
 local factory_collision_mask = {"item-layer","object-layer","player-layer","water-tile", "ground-tile"}
 
 local function copy_factory(original_name, suffix, allow_recipe, minable_count)
@@ -11,13 +13,13 @@ local function copy_factory(original_name, suffix, allow_recipe, minable_count)
     entity.minable.result = entity.name
     entity.minable.count = minable_count
 
-    entity.pictures.picture.layers[2].filename = "__space-factories__/graphics/factory/".. original_name ..".png"
+    entity.pictures.picture.layers[2].filename = SPACE_FACTORIES .. "/graphics/factory/".. original_name ..".png"
 
     local item = table.deepcopy(data.raw.item[original_name .. suffix])
     item.name = entity.name
     item.localised_name = {"item-name." .. entity.name}
 
-    item.icon = "__space-factories__/graphics/icon/".. original_name ..".png"
+    item.icon = SPACE_FACTORIES .. "/graphics/icon/".. original_name ..".png"
 
     item.place_result = entity.name
 
@@ -45,7 +47,7 @@ for _, original_name in ipairs(factory_names) do
     local overlay = table.deepcopy(data.raw["simple-entity"][original_name .. "-overlay"])
     overlay.name = "space-" .. original_name .. "-overlay"
 
-    overlay.picture.layers[2].filename = "__space-factories__/graphics/factory/".. original_name ..".png"
+    overlay.picture.layers[2].filename = SPACE_FACTORIES .. "/graphics/factory/".. original_name ..".png"
 
     data:extend({overlay})
 end
