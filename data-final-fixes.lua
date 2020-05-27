@@ -49,3 +49,25 @@ for _, original_name in ipairs(factory_names) do
 
     data:extend({overlay})
 end
+
+local space_platform = data.raw.tile["se-space-platform-plating"]
+
+local space_factory_floor = table.deepcopy(data.raw.tile["factory-floor-1"])
+space_factory_floor.name = "space-factory-floor"
+
+space_factory_floor.collision_mask = space_platform.collision_mask
+
+space_factory_floor.variants.main = space_platform.variants.main
+
+local space_factory_floor_pattern = table.deepcopy(space_factory_floor)
+space_factory_floor_pattern.name = "space-factory-floor-pattern"
+space_factory_floor_pattern.tint = { r = 0.75, g = 0.75, b = 0.75, a = 1 }
+
+
+local space_factory_entrance = table.deepcopy(data.raw.tile["factory-entrance-1"])
+space_factory_entrance.name = "space-factory-entrance"
+space_factory_entrance.variants.main = space_platform.variants.main
+
+
+data:extend({space_factory_floor, space_factory_floor_pattern, space_factory_entrance})
+

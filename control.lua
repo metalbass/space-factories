@@ -50,17 +50,17 @@ local space_factory_layouts = {
 				x1 = -16, x2 = 16, y1 = -16, y2 = 16, tile = "factory-wall-1"
 			},
 			{
-				x1 = -15, x2 = 15, y1 = -15, y2 = 15, tile = "factory-floor-1"
+				x1 = -15, x2 = 15, y1 = -15, y2 = 15, tile = "space-factory-floor"
 			},
 			{
 				x1 = -3, x2 = 3, y1 = 15, y2 = 18, tile = "factory-wall-1"
 			},
 			{
-				x1 = -2, x2 = 2, y1 = 15, y2 = 18, tile = "factory-entrance-1"
+				x1 = -2, x2 = 2, y1 = 15, y2 = 18, tile = "space-factory-entrance"
 			},
 		},
 		mosaics = {
-			{	x1 = -6, x2 = 6, y1 = -4, y2 = 4, tile = "factory-pattern-1",
+			{	x1 = -6, x2 = 6, y1 = -4, y2 = 4, tile = "space-factory-floor-pattern",
 				pattern = {
 					" ++++    ++ ",
 					"++   +  +++ ",
@@ -79,7 +79,7 @@ local space_factory_layouts = {
 			{x = 7.5, y = -7.5},
 			{x = 7.5, y = 7.5},
 		},
-		connection_tile = "factory-floor-1",
+		connection_tile = "space-factory-floor",
 		connections = {
 			w1 = make_connection("w1", -4.5,-2.5, -15.5,-9.5, west),
 			w2 = make_connection("w2", -4.5,-1.5, -15.5,-5.5, west),
@@ -145,17 +145,17 @@ local space_factory_layouts = {
 				x1 = -24, x2 = 24, y1 = -24, y2 = 24, tile = "factory-wall-2"
 			},
 			{
-				x1 = -23, x2 = 23, y1 = -23, y2 = 23, tile = "factory-floor-2"
+				x1 = -23, x2 = 23, y1 = -23, y2 = 23, tile = "space-factory-floor"
 			},
 			{
 				x1 = -3, x2 = 3, y1 = 23, y2 = 26, tile = "factory-wall-2"
 			},
 			{
-				x1 = -2, x2 = 2, y1 = 23, y2 = 26, tile = "factory-entrance-2"
+				x1 = -2, x2 = 2, y1 = 23, y2 = 26, tile = "space-factory-entrance"
 			},
 		},
 		mosaics = {
-			{	x1 = -6, x2 = 6, y1 = -4, y2 = 4, tile = "factory-pattern-2",
+			{	x1 = -6, x2 = 6, y1 = -4, y2 = 4, tile = "space-factory-floor-pattern",
 				pattern = {
 					" ++++   +++ ",
 					"++   + ++ ++",
@@ -186,7 +186,7 @@ local space_factory_layouts = {
 			{x = 17.5, y = -17.5},
 			{x = 17.5, y = 17.5},
 		},
-		connection_tile = "factory-floor-2",
+		connection_tile = "space-factory-floor",
 		connections = {
 			w1 = make_connection("w1", -6.5,-4.5, -23.5,-18.5, west),
 			w2 = make_connection("w2", -6.5,-3.5, -23.5,-13.5, west),
@@ -271,17 +271,17 @@ local space_factory_layouts = {
 				x1 = -31, x2 = 31, y1 = -31, y2 = 31, tile = "factory-wall-3"
 			},
 			{
-				x1 = -30, x2 = 30, y1 = -30, y2 = 30, tile = "factory-floor-3"
+				x1 = -30, x2 = 30, y1 = -30, y2 = 30, tile = "space-factory-floor"
 			},
 			{
 				x1 = -3, x2 = 3, y1 = 30, y2 = 33, tile = "factory-wall-3"
 			},
 			{
-				x1 = -2, x2 = 2, y1 = 30, y2 = 33, tile = "factory-entrance-3"
+				x1 = -2, x2 = 2, y1 = 30, y2 = 33, tile = "space-factory-entrance"
 			},
 		},
 		mosaics = {
-			{	x1 = -6, x2 = 6, y1 = -4, y2 = 4, tile = "factory-pattern-3",
+			{	x1 = -6, x2 = 6, y1 = -4, y2 = 4, tile = "space-factory-floor-pattern",
 				pattern = {
 					" ++++   +++ ",
 					"++   + ++ ++",
@@ -312,7 +312,7 @@ local space_factory_layouts = {
 			{x = 22.5, y = -22.5},
 			{x = 22.5, y = 22.5},
 		},
-		connection_tile = "factory-floor-3",
+		connection_tile = "space-factory-floor",
 		connections = {
 			w1 = make_connection("w1", -8.5,-5.5, -30.5,-24.5, west),
 			w2 = make_connection("w2", -8.5,-4.5, -30.5,-20.5, west),
