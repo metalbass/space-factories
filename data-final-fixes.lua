@@ -1,10 +1,12 @@
 local factory_names = {"factory-1", "factory-2", "factory-3"}
-
+local factory_collision_mask = {"item-layer","object-layer","player-layer","water-tile", "ground-tile"}
 
 local function copy_factory(original_name, suffix, allow_recipe, minable_count)
     local entity = table.deepcopy(data.raw["storage-tank"][original_name .. suffix])
     entity.name = "space-" .. original_name .. suffix
     entity.localised_name = {"entity-name." .. entity.name .. suffix}
+
+    entity.collision_mask = factory_collision_mask
 
     entity.minable.result = entity.name
     entity.minable.count = minable_count
