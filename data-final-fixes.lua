@@ -1,4 +1,3 @@
-local factory_names = {"factory-1", "factory-2", "factory-3"}
 local SPACE_FACTORIES = "__space-factories__"
 
 local factory_collision_mask = {"item-layer","object-layer","player-layer","water-tile", "ground-tile"}
@@ -36,14 +35,7 @@ local function copy_factory(original_name, suffix, allow_recipe, minable_count)
 
 end
 
-
-for _, original_name in ipairs(factory_names) do
-    copy_factory(original_name, "", true, 0)
-    for i=10,99 do
-        copy_factory(original_name, "-s" .. i, false, 1)
-    end
-    copy_factory(original_name, "-i", false, 1)
-
+local function copy_factory_overlay(original_name)
     local overlay = table.deepcopy(data.raw["simple-entity"][original_name .. "-overlay"])
     overlay.name = "space-" .. original_name .. "-overlay"
 
@@ -52,24 +44,38 @@ for _, original_name in ipairs(factory_names) do
     data:extend({overlay})
 end
 
-local space_platform = data.raw.tile["se-space-platform-plating"]
+local function copy_factory_floors()
+    local space_platform = data.raw.tile["se-space-platform-plating"]
 
-local space_factory_floor = table.deepcopy(data.raw.tile["factory-floor-1"])
-space_factory_floor.name = "space-factory-floor"
+    local space_factory_floor = table.deepcopy(data.raw.tile["factory-floor-1"])
+    space_factory_floor.name = "space-factory-floor"
 
-space_factory_floor.collision_mask = space_platform.collision_mask
+    space_factory_floor.collision_mask = space_platform.collision_mask
 
-space_factory_floor.variants.main = space_platform.variants.main
+    space_factory_floor.variants.main = space_platform.variants.main
 
-local space_factory_floor_pattern = table.deepcopy(space_factory_floor)
-space_factory_floor_pattern.name = "space-factory-floor-pattern"
-space_factory_floor_pattern.tint = { r = 0.75, g = 0.75, b = 0.75, a = 1 }
+    local space_factory_floor_pattern = table.deepcopy(space_factory_floor)
+    space_factory_floor_pattern.name = "space-factory-floor-pattern"
+    space_factory_floor_pattern.tint = { r = 0.75, g = 0.75, b = 0.75, a = 1 }
+
+    local space_factory_entrance = table.deepcopy(data.raw.tile["factory-entrance-1"])
+    space_factory_entrance.name = "space-factory-entrance"
+    space_factory_entrance.variants.main = space_platform.variants.main
+
+    data:extend({space_factory_floor, space_factory_floor_pattern, space_factory_entrance})
+end
 
 
-local space_factory_entrance = table.deepcopy(data.raw.tile["factory-entrance-1"])
-space_factory_entrance.name = "space-factory-entrance"
-space_factory_entrance.variants.main = space_platform.variants.main
+local factory_names = {"factory-1", "factory-2", "factory-3"}
 
+for _, original_name in ipairs(factory_names) do
+    copy_factory(original_name, "", true, 0)
+    for i=10,99 do
+        copy_factory(original_name, "-s" .. i, false, 1)
+    end
+    copy_factory(original_name, "-i", false, 1)
 
-data:extend({space_factory_floor, space_factory_floor_pattern, space_factory_entrance})
+    copy_factory_overlay(original_name)
+end
 
+copy_factory_floors()
